@@ -1,24 +1,17 @@
 # frozen_string_literal: true
 
-def caesar_cipher(string, shift)
-  char_arr = string.chars
+def caesar_cipher(message, shift)
+  char_arr = message.chars
 
-  char_arr.map! do |w|
-    ord = w.ord + shift
-
-    w = if ord >= 91 && ord <= 97 || ord > 122
-
-          (w.ord + shift - 26).chr
-
-        elsif ord >= 65 && ord <= 90 || ord >= 97 && ord <= 122
-
-          (w.ord + shift).chr
-
-        else
-
-          w
-
-        end
+  char_arr.map! do |c|
+    ord = c.ord + shift
+    if ord.between?(91, 97) || ord > 122
+      (c.ord + shift - 26).chr
+    elsif ord.between?(65, 95) || ord.between?(97, 122)
+      (c.ord + shift).chr
+    else
+      c
+    end
   end
 
   char_arr.join('').to_s

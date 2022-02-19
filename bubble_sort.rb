@@ -6,10 +6,13 @@ def bubble_sort(array)
       next unless !array[j].nil? && (array[i] > array[j])
 
       temp = array[j]
+
       array[j] = array[i]
+
       array[i] = temp
     end
   end
+
   array
 end
 
