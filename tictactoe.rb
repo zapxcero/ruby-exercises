@@ -110,7 +110,7 @@ end
 # MAIN
 
 player1 = Player.new('Adrian', 'X')
-player2 = Player.new('Sora', 'O')
+player2 = Player.new('God', 'O')
 
 board = Board.new(player1, player2)
 board.game
