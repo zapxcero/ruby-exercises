@@ -26,7 +26,7 @@ class Board
     true
   end
 
-  def has_winner
+  def winner?
     if @board[0] == @board[1] && @board[1] == @board[2] && @board[0] != '-'
       @game_running = false
       @board[0]
@@ -68,7 +68,7 @@ class Board
       tile = input(@player1)
       mark_board(@player1, tile)
       print_board
-      case has_winner
+      case winner?
       when 'X'
         puts 'Player 1 wins!'
         break if @game_running == false
@@ -82,7 +82,7 @@ class Board
       tile = input(@player2)
       mark_board(@player2, tile)
       print_board
-      case has_winner
+      case winner?
       when 'X'
         puts 'Player 1 wins!'
         break if @game_running == false
