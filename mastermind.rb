@@ -1,17 +1,18 @@
 # frozen_string_literal: true
 
+# A Mastermind Class
 class Game
   def initialize
+    @code_length = 5
     @colors = %w[red green blue yellow brown orange black white]
     @game_running = true
-    @code = @colors.sample(4)
-    puts @code
+    @code = @colors.sample(@code_length)
     @user_color = []
     @hints = []
   end
 
   def ask_color
-    4.times do |i|
+    @code_length.times do |i|
       print "\nEnter color for slot #{i + 1}: "
       @user_color.push(gets.chomp)
     end
@@ -23,14 +24,19 @@ class Game
       @game_running = false
     end
     @user_color.each_with_index do |element, i|
-      @hints.push('perfect') if @user_color[i] == @code[i]
-      @hints.push('good') if @code.include?(element) && @hints[i].nil?
+      if element == @code[i]
+        @hints.push('perfect')
+      elsif @code.include?(element)
+        @hints.push('good')
+      else
+        @hints.push('X')
+      end
     end
   end
 
   def game
     rounds = 0
-    puts "\nAvailable colors: red, green, blue, yellow, brown, orange, black, and white.\nCode length: 4\nNo duplicates.\n"
+    puts "\nAvailable colors: red, green, blue, yellow, brown, orange, black, and white.\nCode length: #{@code_length}\nNo duplicates.\n"
 
     loop do
       rounds += 1
@@ -46,10 +52,11 @@ class Game
       @hints = []
       break if @game_running == false
 
-      if rounds >= 10
-        puts "\n\nYou lose!"
-        break
-      end
+      next unless rounds >= 10
+
+      puts "\n\nYou lose!\n"
+      p @code
+      break
     end
   end
 end
